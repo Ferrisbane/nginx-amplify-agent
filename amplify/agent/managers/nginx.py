@@ -211,6 +211,7 @@ class NginxManager(ObjectManager):
                         out, err = subp.call('ps o command %d' % ppid)
                         parent_command = out[1] # take the second line because the first is a header
                         if not any(launcher in parent_command for launcher in LAUNCHERS):
+                            context.log.debug('nginx launcher found, "%s" is currently not supported' % parent_command)
                             continue
 
                     # get path to binary, prefix and conf_path
